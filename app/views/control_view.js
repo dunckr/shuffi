@@ -1,5 +1,6 @@
 // Control View
-var Template = require('./templates/control');
+var Template = require('./templates/control'),
+    Player = require('models/player');
 
 module.exports = Backbone.View.extend({
 
@@ -18,10 +19,21 @@ module.exports = Backbone.View.extend({
   initialize: function() {
     this.render();
 
-    this.model.get('list').bind('reset', function(model) {
+    var self = this;
 
-      // this.model.unload();
-    });
+
+    // this.model.get('list').bind('reset', function(models) {
+    //   console.log('deleted in control view');
+    //   console.log(models);
+    //   // model.unload();
+    // });
+
+    // this.model.get('list').on('change:inc', function(model, value) {
+    //   console.log('changed inc from control view');
+    //   console.log(model + ' ' + value);
+    //   console.log(this);
+
+    // });
 
   },
 
@@ -47,6 +59,8 @@ module.exports = Backbone.View.extend({
   },
 
   next: function() {
+    // var col = this.model.get('model');
+
     this.model.next();
     // this.model.play();
   },

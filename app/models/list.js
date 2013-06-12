@@ -33,6 +33,8 @@ module.exports = Backbone.Collection.extend({
 
       for (var i = this.current+1; i <= l; i++) {
 
+        if (typeof this.at(i) === 'undefined') { return -1; }
+
         if (this.at(i).get('inc') === true) {
           this.current = i;
           return i;
@@ -48,6 +50,9 @@ module.exports = Backbone.Collection.extend({
     } else if (-1 < this.current-1) {
 
       for (var i = this.current-1; i > -1; i--) {
+
+        if (typeof this.at(i) === 'undefined') { return -1; }
+
         if (this.at(i).get('inc') === true) {
           this.current = i;
           return i;

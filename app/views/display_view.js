@@ -25,12 +25,6 @@ module.exports = Backbone.View.extend({
       this.collection.bind('reset', function(model) {
         self.render();
       });
-
-      // this.collection.on('change:inc', function(model, value) {
-      //   console.log('changed inc ' + model + ' ' + value);
-      //   self.render();
-      // });
-
     }
   },
 
@@ -58,10 +52,12 @@ module.exports = Backbone.View.extend({
 
   deleteAll: function() {
     this.collection.reset();
+
   },
 
   addAll: function() {
-    console.log('test');
+    // TODO:
+    // go through each item and set item inc true
   }
 
 });

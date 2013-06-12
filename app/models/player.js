@@ -93,29 +93,50 @@ module.exports = Backbone.Model.extend({
   },
 
   load: function() {
+    var col = this.get('model');
+    var curr = col.current;
+
+    var pos = col.at(curr);
+
+    console.log(col);
+    console.log(curr);
+    console.log(pos);
+
+    this.YTPlayer.cueVideoById( pos.get('videoId') );
+
+    if (this.state === 5) {
+      this.play();
+    }
     // err
     // var list = this.get('list');
     // this.YTPlayer.cueVideoById( list.at( list.current ).get('videoId') );
-    this.YTPlayer.cueVideoById(this.get('list').at(this.get('list').current).get('videoId'));
+    // this.YTPlayer.cueVideoById(this.get('list').at(this.get('list').current).get('videoId'));
   },
 
   unload: function() {
-    this.YTPlayer.stopVideo();
-    this.YTPlayer.clearVideo();
+    if (typeof this.get('state') !== 'undefined' && this.get('state') !== -1) {
+      this.YTPlayer.stopVideo();
+      this.YTPlayer.clearVideo();
+    }
   },
 
   next: function() {
-    if (typeof this.get('state') !== 'undefined' && this.get('state') !== -1) {
-      this.list.next();
-      console.log(this.list);
-      this.load();
-    }
+
+    var col = this.get('model');
+    console.log(col);
+    col.next();
+    this.load();
+
+    // if (typeof this.get('state') !== 'undefined' && this.get('state') !== -1) {
   },
 
   prev: function() {
-    if (typeof this.get('state') !== 'undefined' && this.get('state') !== -1) {
-      this.list.prev();
-    }
+    var col = this.get('model');
+    col.prev();
+    this.load();
+    // if (typeof this.get('state') !== 'undefined' && this.get('state') !== -1) {
+    //   this.list.prev();
+    // }
   },
 
   mute: function() {

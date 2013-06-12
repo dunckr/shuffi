@@ -12,7 +12,7 @@ Application = {
       this.displayView = new DisplayView({collection: this.list});
 
       var Player = require('models/player');
-      this.player = new Player({list: this.list});
+      this.player = new Player({model: this.list});
 
       var ControlView = require('views/control_view');
       this.controlView = new ControlView({model: this.player});
