@@ -1,0 +1,6 @@
+# NPM packages folder.
+node_modules/
+vendor/
+
+# Brunch folder for temporary files.
+tmp/
