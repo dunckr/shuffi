@@ -18,6 +18,25 @@ module.exports = Backbone.View.extend({
   initialize: function() {
     this.render();
 
+    var self = this;
+    var col = this.model.get('model');
+
+    col.bind('change:inc', function(model, value) {
+      var total = self.model.get('total');
+      console.log('before ' + total + ' value = ' + value);
+      if (value) {
+        self.model.set('total', total+1);
+      } else {
+        self.model.set('total', total-1);
+      }
+      console.log('binding side total: ' + self.model.get('total'));
+      self.model.load();
+    });
+
+    col.bind('reset', function(models) {
+      self.model.unload();
+    });
+
     // this.model.get('list').bind('reset', function(models) {
     //   console.log('deleted in control view');
     //   console.log(models);

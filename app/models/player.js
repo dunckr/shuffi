@@ -9,7 +9,8 @@ module.exports = Backbone.Model.extend({
   defaults: {
     width:    200,
     height:   200,
-    state:    -1
+    state:    -1,
+    total:     0
   },
 
   initialize: function() {
@@ -28,14 +29,54 @@ module.exports = Backbone.Model.extend({
         height:   self.get('height'),
         width:    self.get('width'),
         events: {
-          onStateChange: self.stateChanged
+          onStateChange: self.stateChanged.bind(self)
         }
       }
     );
   },
 
-  stateChanged: function(evt) {
-    console.log(evt.data);
+  stateChanged: function(event) {
+    this.set('state', event.data);
+
+    switch(this.get('state')) {
+      case -1:
+        // console.log('unstarted');
+        break;
+      // Ended
+      case 0:
+        // console.log('ended');
+        this.next();
+        break;
+      // Playing
+      case 1:
+        // console.log('playing');
+        break;
+      // Paused
+      case 2:
+        // console.log('paused');
+        break;
+      // Buffering
+      case 3:
+        break;
+      // Video Cued
+      case 5:
+        // console.log('queued so try and play!');
+        // console.log(this.get('total'));
+        if (this.get('total') === 1) {
+          this.play();
+        }
+        break;
+      // case 0:
+      //   console.log('unstarted');
+      //   this.next();
+      //   break;
+      // case 1:
+      //   break;
+      // case 5:
+
+      //   this.play();
+      //   break;
+    }
      // var state = this.get('state');
     // switch(state) {
     //   // Unstarted
@@ -68,16 +109,21 @@ module.exports = Backbone.Model.extend({
   load: function() {
     var col = this.get('model');
     var curr = col.current;
+    console.log('current pos: ' + curr);
+
     var pos = col.at(curr);
     if (typeof pos !== 'undefined') {
       this.YTPlayer.cueVideoById( pos.get('videoId') );
     }
   },
 
+  play: function() {
+    this.YTPlayer.playVideo();
+  },
+
   unload: function() {
     if (typeof this.get('state') !== 'undefined' && this.get('state') !== -1) {
-      this.YTPlayer.stopVideo();
-      this.YTPlayer.clearVideo();
+      this.YTPlayer.cueVideoById( '' );
     }
   },
 

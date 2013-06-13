@@ -57,10 +57,9 @@ module.exports = Backbone.View.extend({
 
   addAll: function() {
     // TODO
-    // this.collection.each(function(model,index) {
-    //   model.set('inc',true);
-      
-    // });
+    this.collection.each(function(model,index) {
+      model.set('inc',true);
+    });
   }
 
 });
