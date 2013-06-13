@@ -211,6 +211,9 @@ window.require.register("models/list", function(exports, require, module) {
   
 });
 window.require.register("models/player", function(exports, require, module) {
+  // redo from scratch
+  // start at start with events!!!
+
   var List = require('./list');
 
 
@@ -227,103 +230,61 @@ window.require.register("models/player", function(exports, require, module) {
       window.onYouTubeIframeAPIReady = function() {
         self.createPlayer();
       };
-
     },
 
-
     createPlayer: function() {
+      var player = $('#player');
       var self = this;
-      this.YTPlayer = new YT.Player(
-        'player',
+      self.YTPlayer = new YT.Player(
+        player[0],
         {
-          height:   this.get('height'),
-          width:    this.get('width'),
+          height:   self.get('height'),
+          width:    self.get('width'),
           events: {
-            'onStateChange': function(event) {
-              self.set('state', event.data);
-              self.stateChanged(event);
-            }
+            onStateChange: self.stateChanged
           }
         }
       );
     },
 
-    stateChanged: function(event) {
-      console.log('STATECHANGED: ' + this.get('state'));
-      var state = this.get('state');
-      switch(state) {
-        case 1:
-
-          break;
-        case 2:
-
-          break;
-      }
-      if (state === 0) {
-        console.log('statechanged and is 0');
-      }
-    },
-
-    play: function() {
-      switch(this.get('state')) {
-        // Unstarted
-        case -1:
-          console.log('unstarted');
-          this.load();
-          break;
-        // Ended
-        case 0:
-          console.log('ended');
-          this.YTPlayer.playVideo();
-          break;
-        // Playing
-        case 1:
-          console.log('playing');
-          this.YTPlayer.pauseVideo();
-          break;
-        // Paused
-        case 2:
-          console.log('paused');
-          this.YTPlayer.playVideo();
-          break;
-        // Buffering
-        case 3:
-          break;
-        // Video Cued
-        case 5:
-          this.YTPlayer.playVideo();
-          break;
-      }
-
-      // if (typeof this.get('state') !== 'undefined' && this.get('state') !== -1) {      
-
-      //   if (this.get('state') === 1) {
-      //     this.YTPlayer.pauseVideo();
-      //   } else {
+    stateChanged: function(evt) {
+      console.log(evt.data);
+       // var state = this.get('state');
+      // switch(state) {
+      //   // Unstarted
+      //   case -1:
+      //     console.log('unstarted');
+      //     break;
+      //   // Ended
+      //   case 0:
+      //     console.log('ended');
+      //     this.next();
+      //     break;
+      //   // Playing
+      //   case 1:
+      //     console.log('playing');
+      //     break;
+      //   // Paused
+      //   case 2:
+      //     console.log('paused');
+      //     break;
+      //   // Buffering
+      //   case 3:
+      //     break;
+      //   // Video Cued
+      //   case 5:
+      //     console.log('queued so try and play!');
       //     this.YTPlayer.playVideo();
-      //   }
-      // }
+      //     break;
     },
 
     load: function() {
       var col = this.get('model');
       var curr = col.current;
-
       var pos = col.at(curr);
-
-      console.log(col);
-      console.log(curr);
-      console.log(pos);
-
-      this.YTPlayer.cueVideoById( pos.get('videoId') );
-
-      if (this.state === 5) {
-        this.play();
+      if (typeof pos !== 'undefined') {
+        this.YTPlayer.cueVideoById( pos.get('videoId') );
       }
-      // err
-      // var list = this.get('list');
-      // this.YTPlayer.cueVideoById( list.at( list.current ).get('videoId') );
-      // this.YTPlayer.cueVideoById(this.get('list').at(this.get('list').current).get('videoId'));
     },
 
     unload: function() {
@@ -334,22 +295,15 @@ window.require.register("models/player", function(exports, require, module) {
     },
 
     next: function() {
-
       var col = this.get('model');
-      console.log(col);
       col.next();
       this.load();
-
-      // if (typeof this.get('state') !== 'undefined' && this.get('state') !== -1) {
     },
 
     prev: function() {
       var col = this.get('model');
       col.prev();
       this.load();
-      // if (typeof this.get('state') !== 'undefined' && this.get('state') !== -1) {
-      //   this.list.prev();
-      // }
     },
 
     mute: function() {
@@ -380,8 +334,7 @@ window.require.register("models/song", function(exports, require, module) {
 });
 window.require.register("views/control_view", function(exports, require, module) {
   // Control View
-  var Template = require('./templates/control'),
-      Player = require('models/player');
+  var Template = require('./templates/control');
 
   module.exports = Backbone.View.extend({
 
@@ -399,9 +352,6 @@ window.require.register("views/control_view", function(exports, require, module)
 
     initialize: function() {
       this.render();
-
-      var self = this;
-
 
       // this.model.get('list').bind('reset', function(models) {
       //   console.log('deleted in control view');
@@ -440,20 +390,29 @@ window.require.register("views/control_view", function(exports, require, module)
     },
 
     next: function() {
-      // var col = this.model.get('model');
+
+      console.log(this.model.YTPlayer.getPlayerState());
+
+
+
+      console.log($('#player')[0]);
+
+      $("#player")[0].addEventListener("onStateChange", function() {
+        console.log('here');
+      });
+      // $("#player").addEventListener("onStateChange", function() {
+      //   console.log('here');
+      // });
+
+      // test if i can get the onstatechange change from here
+      // if so... then need to setup after the onready above...
 
       this.model.next();
-      // this.model.play();
     },
 
     prev: function() {
       this.model.prev();
     }
-
-    // mute: function() {
-    //   this.model.mute();
-    // }
-
   });
 });
 window.require.register("views/display_view", function(exports, require, module) {
@@ -515,8 +474,11 @@ window.require.register("views/display_view", function(exports, require, module)
     },
 
     addAll: function() {
-      // TODO:
-      // go through each item and set item inc true
+      // TODO
+      // this.collection.each(function(model,index) {
+      //   model.set('inc',true);
+        
+      // });
     }
 
   });
@@ -672,6 +634,9 @@ window.require.register("views/song_view", function(exports, require, module) {
     },
 
     add: function() {
+      // TODO
+      // dry this should be binded to the change
+      // update the icon accordingly
       if (!this.model.get('inc')) {
         this.$el
           .find('#add i')

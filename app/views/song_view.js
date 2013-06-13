@@ -26,6 +26,9 @@ module.exports = Backbone.View.extend({
   },
 
   add: function() {
+    // TODO
+    // dry this should be binded to the change
+    // update the icon accordingly
     if (!this.model.get('inc')) {
       this.$el
         .find('#add i')
