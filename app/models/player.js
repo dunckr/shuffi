@@ -46,6 +46,7 @@ module.exports = Backbone.Model.extend({
       case 0:
         // console.log('ended');
         this.next();
+        this.play();
         break;
       // Playing
       case 1:
@@ -63,7 +64,7 @@ module.exports = Backbone.Model.extend({
         // console.log('queued so try and play!');
         // console.log(this.get('total'));
         if (this.get('total') === 1) {
-          this.play();
+          // this.play();
         }
         break;
       // case 0:

@@ -36,20 +36,6 @@ module.exports = Backbone.View.extend({
     col.bind('reset', function(models) {
       self.model.unload();
     });
-
-    // this.model.get('list').bind('reset', function(models) {
-    //   console.log('deleted in control view');
-    //   console.log(models);
-    //   // model.unload();
-    // });
-
-    // this.model.get('list').on('change:inc', function(model, value) {
-    //   console.log('changed inc from control view');
-    //   console.log(model + ' ' + value);
-    //   console.log(this);
-
-    // });
-
   },
 
   render: function() {
