@@ -56,9 +56,14 @@ module.exports = Backbone.View.extend({
   },
 
   addAll: function() {
-    // TODO
     this.collection.each(function(model,index) {
       model.set('inc',true);
+      // just set all 
+      $('.song')
+        .css('background', 'black')
+        .find('#add i')
+          .removeClass('icon-plus')
+          .addClass('icon-minus');
     });
   }
 

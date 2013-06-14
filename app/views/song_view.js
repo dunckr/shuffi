@@ -9,6 +9,11 @@ module.exports = Backbone.View.extend({
 
   initialize: function() {
     this.render();
+
+    var self = this;
+    this.$el.click(function() {
+      self.add();
+    });
   },
 
   render: function(){
@@ -19,6 +24,10 @@ module.exports = Backbone.View.extend({
   events: {
     'click #play':    'play',
     'click #add':     'add'
+  },
+
+  whole: function() {
+    console.log('whole row clicked...');
   },
 
   play: function() {
@@ -35,6 +44,9 @@ module.exports = Backbone.View.extend({
         .removeClass('icon-plus')
         .addClass('icon-minus');
 
+      this.$el
+        .css('background', 'black');
+
       this.model.set('inc',true);
 
     } else {
@@ -42,6 +54,9 @@ module.exports = Backbone.View.extend({
         .find('#add i')
         .removeClass('icon-minus')
         .addClass('icon-plus');
+
+      this.$el
+        .css('background', 'none');
 
       this.model.set('inc',false);
     }

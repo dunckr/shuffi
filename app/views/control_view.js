@@ -23,13 +23,13 @@ module.exports = Backbone.View.extend({
 
     col.bind('change:inc', function(model, value) {
       var total = self.model.get('total');
-      console.log('before ' + total + ' value = ' + value);
+      // console.log('before ' + total + ' value = ' + value);
       if (value) {
         self.model.set('total', total+1);
       } else {
         self.model.set('total', total-1);
       }
-      console.log('binding side total: ' + self.model.get('total'));
+      // console.log('binding side total: ' + self.model.get('total'));
       self.model.load();
     });
 
@@ -61,15 +61,9 @@ module.exports = Backbone.View.extend({
 
   next: function() {
 
-    console.log(this.model.YTPlayer.getPlayerState());
+    // console.log(this.model.YTPlayer.getPlayerState());
+   // console.log($('#player')[0]);
 
-
-
-    console.log($('#player')[0]);
-
-    $("#player")[0].addEventListener("onStateChange", function() {
-      console.log('here');
-    });
     // $("#player").addEventListener("onStateChange", function() {
     //   console.log('here');
     // });

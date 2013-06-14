@@ -72,12 +72,15 @@ module.exports = Backbone.View.extend({
         song.set('title',details.title.$t);
         song.set('author', details.author[0].name.$t );
         song.set('date', details.published.$t );
+        // TODO: hour:min:sec
         song.set('duration', details.media$group.yt$duration.seconds);
 
         if (typeof details.yt$statistics == 'undefined') {
           song.set('viewCount', 0 );
           song.set('favCount', 0 );
         } else {
+          // TODO
+          // 100,000,00
           song.set('viewCount', details.yt$statistics.viewCount || 0);
           song.set('favCount', (details.yt$statistics.favoriteCount || 0));
         }

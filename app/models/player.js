@@ -110,8 +110,6 @@ module.exports = Backbone.Model.extend({
   load: function() {
     var col = this.get('model');
     var curr = col.current;
-    console.log('current pos: ' + curr);
-
     var pos = col.at(curr);
     if (typeof pos !== 'undefined') {
       this.YTPlayer.cueVideoById( pos.get('videoId') );
