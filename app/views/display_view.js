@@ -70,7 +70,7 @@ module.exports = Backbone.View.extend({
       model.set('inc',true);
       // just set all 
       $('.song')
-        .css('background', 'rgb( 36, 42, 47 )')
+        .css('background', 'rgb( 40, 100, 140 )')
         .find('#add i')
           .removeClass('icon-plus-sign')
           .addClass('icon-minus-sign');

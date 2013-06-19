@@ -73,16 +73,21 @@ module.exports = Backbone.View.extend({
         song.set('author', details.author[0].name.$t );
         song.set('date', details.published.$t );
 
+        if (typeof details.gd$rating == 'undefined') {
+          song.set('favCount', 0 );
+        } else {
+          song.set('favCount', Math.floor( details.gd$rating.average ) || 0);
+        }
+
+
         var time = self.timeFormat(details.media$group.yt$duration.seconds);
         song.set('duration', time );
 
         if (typeof details.yt$statistics == 'undefined') {
           song.set('viewCount', 0 );
-          song.set('favCount', 0 );
         } else {
           var viewCount = self.countFormat(details.yt$statistics.viewCount);
           song.set('viewCount', viewCount || 0);
-          song.set('favCount', (details.yt$statistics.favoriteCount || 0));
         }
 
         if (typeof details.media$group.media$thumbnail[0].url !== 'undefined') {

@@ -32,9 +32,6 @@ module.exports = Backbone.View.extend({
   },
 
   add: function() {
-    // TODO
-    // dry this should be binded to the change
-    // update the icon accordingly
     if (!this.model.get('inc')) {
       this.$el
         .find('#add i')
@@ -42,7 +39,7 @@ module.exports = Backbone.View.extend({
         .addClass('icon-minus-sign');
 
       this.$el
-        .css('background', 'rgb( 36, 42, 47 )');
+        .css('background', 'rgb( 40, 100, 140 )');
 
       this.model.set('inc',true);
 

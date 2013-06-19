@@ -22,7 +22,16 @@ module.exports = Backbone.View.extend({
     var col = this.model.get('model');
 
     col.bind('change:inc', function(model, value) {
-      self.model.load();
+      if (value) {
+        self.model.load();
+      } else {
+        var col = self.model.get('model');
+        var curr = col.current;
+        var pos = col.at(curr);
+        if (model === pos) {
+          self.model.unload();
+        }
+      }
     });
 
     col.bind('reset', function(models) {
@@ -36,33 +45,10 @@ module.exports = Backbone.View.extend({
   },
 
   play: function() {
-    // var state = this.model.get('state');
-    // if (state === 1) {
-    //   this.$el
-    //     .find('#playBtn i')
-    //     .removeClass('icon-play')
-    //     .addClass('icon-pause');
-    // } else if (state === 2) {
-    //   this.$el
-    //     .find('#playBtn i')
-    //     .removeClass('icon-pause')
-    //     .addClass('icon-play');
-    // }
     this.model.play();
   },
 
   next: function() {
-
-    // console.log(this.model.YTPlayer.getPlayerState());
-   // console.log($('#player')[0]);
-
-    // $("#player").addEventListener("onStateChange", function() {
-    //   console.log('here');
-    // });
-
-    // test if i can get the onstatechange change from here
-    // if so... then need to setup after the onready above...
-
     this.model.next();
   },
 

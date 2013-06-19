@@ -33,7 +33,6 @@ module.exports = Backbone.Model.extend({
 
   stateChanged: function(event) {
     this.set('state', event.data);
-    console.log(this.get('state'));
 
     switch(this.get('state')) {
       case -1:
@@ -67,6 +66,11 @@ module.exports = Backbone.Model.extend({
     var curr = col.current;
     var pos = col.at(curr);
     if (typeof pos !== 'undefined') {
+      if (!pos.get('inc')) {
+        col.next();
+        curr = col.current;
+        pos = col.at(curr);
+      }
       this.YTPlayer.cueVideoById( pos.get('videoId') );
     }
   },
