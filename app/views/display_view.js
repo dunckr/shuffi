@@ -26,6 +26,16 @@ module.exports = Backbone.View.extend({
         self.render();
       });
     }
+
+    // $(window).scroll(function() {
+    //   if (typeof this.collection !== 'undefined') {
+    //     console.log(this.collection.length);
+    //     if (this.collection.length > 0  && ($(window).scrollTop() + $(window).height() > $(document).height() - 100) ) {
+    //       alert('near the bottom');
+    //     }
+    //   }
+    // });
+
   },
 
   events: {
@@ -60,10 +70,10 @@ module.exports = Backbone.View.extend({
       model.set('inc',true);
       // just set all 
       $('.song')
-        .css('background', 'black')
+        .css('background', 'rgb( 36, 42, 47 )')
         .find('#add i')
-          .removeClass('icon-plus')
-          .addClass('icon-minus');
+          .removeClass('icon-plus-sign')
+          .addClass('icon-minus-sign');
     });
   }
 

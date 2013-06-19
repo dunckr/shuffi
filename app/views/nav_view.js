@@ -72,16 +72,16 @@ module.exports = Backbone.View.extend({
         song.set('title',details.title.$t);
         song.set('author', details.author[0].name.$t );
         song.set('date', details.published.$t );
-        // TODO: hour:min:sec
-        song.set('duration', details.media$group.yt$duration.seconds);
+
+        var time = self.timeFormat(details.media$group.yt$duration.seconds);
+        song.set('duration', time );
 
         if (typeof details.yt$statistics == 'undefined') {
           song.set('viewCount', 0 );
           song.set('favCount', 0 );
         } else {
-          // TODO
-          // 100,000,00
-          song.set('viewCount', details.yt$statistics.viewCount || 0);
+          var viewCount = self.countFormat(details.yt$statistics.viewCount);
+          song.set('viewCount', viewCount || 0);
           song.set('favCount', (details.yt$statistics.favoriteCount || 0));
         }
 
@@ -97,14 +97,14 @@ module.exports = Backbone.View.extend({
   setRelevance: function() {
     this.searchBy = 'relevance';
     $('#searchByIcon')
-      .removeClass('icon-time')
+      .removeClass('icon-calendar')
       .removeClass('icon-eye-open')
       .addClass('icon-zoom-in');
   },
   setViewCount: function() {
     this.searchBy = 'viewCount';
     $('#searchByIcon')
-      .removeClass('icon-time')
+      .removeClass('icon-calendar')
       .removeClass('icon-zoom-in')
       .addClass('icon-eye-open');
   },
@@ -113,7 +113,19 @@ module.exports = Backbone.View.extend({
     $('#searchByIcon')
       .removeClass('icon-zoom-in')
       .removeClass('icon-eye-open')
-      .addClass('icon-time');
+      .addClass('icon-calendar');
+  },
+
+  timeFormat: function(secs) {
+    var d = Number(secs);
+    var h = Math.floor(d / 3600);
+    var m = Math.floor(d % 3600 / 60);
+    var s = Math.floor(d % 3600 % 60);
+    return ((h > 0 ? h + ":" : "") + (m > 0 ? (h > 0 && m < 10 ? "0" : "") + m + ":" : "0:") + (s < 10 ? "0" : "") + s);
+  },
+
+  countFormat: function(n) {
+    return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
 

@@ -65,6 +65,16 @@ module.exports = Backbone.Collection.extend({
     var c = this.get(cid);
     c.get('inc') ? c.set('inc',false) : c.set('inc',true);
     return c;
+  },
+
+  total: function() {
+    var total = 0;
+    this.each(function(model,index) {
+      if (model.get('inc')) {
+        total++;
+      }
+    });
+    return total;
   }
 
 });

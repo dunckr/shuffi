@@ -22,14 +22,6 @@ module.exports = Backbone.View.extend({
     var col = this.model.get('model');
 
     col.bind('change:inc', function(model, value) {
-      var total = self.model.get('total');
-      // console.log('before ' + total + ' value = ' + value);
-      if (value) {
-        self.model.set('total', total+1);
-      } else {
-        self.model.set('total', total-1);
-      }
-      // console.log('binding side total: ' + self.model.get('total'));
       self.model.load();
     });
 

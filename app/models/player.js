@@ -1,6 +1,3 @@
-// redo from scratch
-// start at start with events!!!
-
 var List = require('./list');
 
 
@@ -9,8 +6,7 @@ module.exports = Backbone.Model.extend({
   defaults: {
     width:    200,
     height:   200,
-    state:    -1,
-    total:     0
+    state:    -1
   },
 
   initialize: function() {
@@ -37,6 +33,7 @@ module.exports = Backbone.Model.extend({
 
   stateChanged: function(event) {
     this.set('state', event.data);
+    console.log(this.get('state'));
 
     switch(this.get('state')) {
       case -1:
@@ -61,50 +58,8 @@ module.exports = Backbone.Model.extend({
         break;
       // Video Cued
       case 5:
-        // console.log('queued so try and play!');
-        // console.log(this.get('total'));
-        if (this.get('total') === 1) {
-          // this.play();
-        }
         break;
-      // case 0:
-      //   console.log('unstarted');
-      //   this.next();
-      //   break;
-      // case 1:
-      //   break;
-      // case 5:
-
-      //   this.play();
-      //   break;
     }
-     // var state = this.get('state');
-    // switch(state) {
-    //   // Unstarted
-    //   case -1:
-    //     console.log('unstarted');
-    //     break;
-    //   // Ended
-    //   case 0:
-    //     console.log('ended');
-    //     this.next();
-    //     break;
-    //   // Playing
-    //   case 1:
-    //     console.log('playing');
-    //     break;
-    //   // Paused
-    //   case 2:
-    //     console.log('paused');
-    //     break;
-    //   // Buffering
-    //   case 3:
-    //     break;
-    //   // Video Cued
-    //   case 5:
-    //     console.log('queued so try and play!');
-    //     this.YTPlayer.playVideo();
-    //     break;
   },
 
   load: function() {
@@ -130,12 +85,14 @@ module.exports = Backbone.Model.extend({
     var col = this.get('model');
     col.next();
     this.load();
+    this.play();
   },
 
   prev: function() {
     var col = this.get('model');
     col.prev();
     this.load();
+    this.play();
   },
 
   mute: function() {

@@ -1,6 +1,18 @@
-.brand {
-	font-family: 'Orbitron', sans-serif;
+@font-face {
+    font-family: 'BebasRegular';
+    src: url('/fonts/BEBAS___-webfont.eot');
+    src: url('/fonts/BEBAS___-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/BEBAS___-webfont.woff') format('woff'),
+         url('/fonts/BEBAS___-webfont.ttf') format('truetype'),
+         url('/fonts/BEBAS___-webfont.svg#BebasRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.navbar .brand {
+	font-family: "BebasRegular", Arial, sans-serif;
 	font-size: 30px;
+	color: rgb( 192, 192, 192 );
 }
 
 .song img {
@@ -26,24 +38,107 @@ body {
 	margin-bottom: 250px;
 }
 
-// @media (min-width: 980px){
-// 	body {
-// 		margin-top: 50px;
-// 		margin-bottom: 250px;
-// 	}
-// }
+#searchBox {
+	// -webkit-border-radius: 20px;
+	// -webkit-border-top-right-radius: 1px;
+	// -webkit-border-bottom-right-radius: 1px;
+	// -moz-border-radius: 20px;
+	// -moz-border-radius-topright: 1px;
+	// -moz-border-radius-bottomright: 1px;
+	// border-radius: 20px;
+	// border-top-right-radius: 1px;
+	// border-bottom-right-radius: 1px;
+}
 
-// need to setup affix
+.dropdown-menu {
+	left: 150px;
+}
 
-// .navbar-search .search-query {
-//     -webkit-border-radius: 14px 0 0 14px;
-//        -moz-border-radius: 14px 0 0 14px;
-//             border-radius: 14px 0 0 14px;
-// }
+#searchBtn {
+  cursor: pointer;
+}
 
-// .navbar-search .btn {
-//     -webkit-border-radius: 0 14px 14px 0;
-//        -moz-border-radius: 0 14px 14px 0;
-//             border-radius: 0 14px 14px 0;
-//     cursor: pointer;
-// }
+
+// TODO 
+// nice gradient over heading
+// this isnt working...
+#nav > .navbar-inner {
+	background-image: url("/images/grad.png");
+	background-repeat: repeat;
+	// background-image: linear-gradient(to bottom, rgb(216, 74, 73 ), rgb(255, 255, 255))
+	// background-color: rgb( 216, 74, 73 );
+	// box-shadow: 0cm 0cm 0.70555555555556cm 0cm rgb( 255, 255, 255 );
+}
+
+.navbar-inner img {
+	float: left;
+	margin-right: 10px;
+}
+
+
+
+// text-align: left;
+// display: block;
+// float: left;
+// position: relative;
+
+#control > .navbar-inner {
+	background-image: url("/images/grad.png");
+	background-repeat: repeat;
+  // background-image: linear-gradient(to bottom, rgb(17, 20, 23 ), rgb(255, 255, 255))
+  // box-shadow: 0cm 0cm 0.70555555555556cm 0cm rgb( 0, 0, 0 );
+}
+
+
+body {
+  background-color: rgb( 17, 20, 23 );
+  // box-shadow: 0cm 0cm 0.70555555555556cm 0cm rgb( 0, 0, 0 );
+}
+
+#displayTable {
+  color: white;
+  margin: 0 auto 0 auto;
+  font-family: 'Open Sans', sans-serif;
+}
+
+#displayControl {
+  background-color: rgb( 216, 74, 73 );
+  width: 100%;
+  padding: 10px 0 10px 0;
+}
+
+#song > span {
+	color: white;
+}
+
+#tweet {
+	text-decoration: none;
+
+}
+
+.player {
+	color: rgb( 175, 20, 19 );
+}
+
+.player:hover {
+	color: white;
+}
+
+#displayControl button {
+  border-style: solid;
+  border-width: 0.03527777777778cm;
+  border-color: rgb( 0, 0, 0 );
+  border-radius: 0.2cm;
+  background-image: -moz-linear-gradient( 90deg, rgb( 15, 18, 22 ) 0%, rgb( 47, 52, 60 ) 100%);
+  background-image: -webkit-linear-gradient( 90deg, rgb( 15, 18, 22 ) 0%, rgb( 47, 52, 60 ) 100%);
+  color: rgb( 192, 192, 192 );
+}
+
+#displayControl button:hover {
+  background-image: -moz-linear-gradient( 90deg, rgb( 255, 255, 255 ) 0%, rgb( 47, 52, 60 ) 100%);
+  background-image: -webkit-linear-gradient( 90deg, rgb( 255, 255, 255 ) 0%, rgb( 47, 52, 60 ) 100%); 	
+}
+
+#nav .nav {
+	margin-left: 80px;
+}

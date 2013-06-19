@@ -26,9 +26,6 @@ module.exports = Backbone.View.extend({
     'click #add':     'add'
   },
 
-  whole: function() {
-    console.log('whole row clicked...');
-  },
 
   play: function() {
     this.model.set('inc',true);
@@ -41,19 +38,19 @@ module.exports = Backbone.View.extend({
     if (!this.model.get('inc')) {
       this.$el
         .find('#add i')
-        .removeClass('icon-plus')
-        .addClass('icon-minus');
+        .removeClass('icon-plus-sign')
+        .addClass('icon-minus-sign');
 
       this.$el
-        .css('background', 'black');
+        .css('background', 'rgb( 36, 42, 47 )');
 
       this.model.set('inc',true);
 
     } else {
       this.$el
         .find('#add i')
-        .removeClass('icon-minus')
-        .addClass('icon-plus');
+        .removeClass('icon-minus-sign')
+        .addClass('icon-plus-sign');
 
       this.$el
         .css('background', 'none');
