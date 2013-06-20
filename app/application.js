@@ -17,6 +17,9 @@ Application = {
       var ControlView = require('views/control_view');
       this.controlView = new ControlView({model: this.player});
 
+      var Router = require('lib/router');
+      this.router = new Router();
+
       if (typeof Object.freeze === 'function') Object.freeze(this);
     }
 };

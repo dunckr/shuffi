@@ -1,11 +1,18 @@
-var application = require('application')
+var application = require('application');
 
 module.exports = Backbone.Router.extend({
     routes: {
-        '': 'home'
+        '': 'home',
+        '*action': 'action'
     },
-    
+
     home: function() {
-        $('body').html(application.homeView.render().el)
+    },
+
+    action: function(route) {
+      $('#deleteAllBtn').click();
+      $('#searchBox').val(route);
+      $('#searchBtn').click();
     }
-})
+
+});
