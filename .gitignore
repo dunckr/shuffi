@@ -4,3 +4,5 @@ vendor/
 
 # Brunch folder for temporary files.
 tmp/
+
+.DS_Store
